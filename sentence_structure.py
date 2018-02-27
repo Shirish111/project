@@ -2,6 +2,7 @@ import nltk
 import pandas as pd
 from sklearn import linear_model
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.utils import shuffle
 from unidecode import unidecode
 
 
@@ -48,6 +49,7 @@ features1 = featureset_df(taggedSents1, 1)
 features2 = featureset_df(taggedSents1, 0)
 features = pd.concat([features1, features2])
 
+features = shuffle(features)
 
 model = RandomForestClassifier(n_estimators=100)
 model = model.fit(features[imp_cols].values, features["target"].values)
